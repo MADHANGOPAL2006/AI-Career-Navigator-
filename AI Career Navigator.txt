@@ -1,0 +1,103 @@
+import java.util.*;
+
+public class AICareerNavigator {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        ArrayList<String> userSkills = new ArrayList<>();
+
+        System.out.println("===== AI Career Navigator =====");
+
+        System.out.print("Enter Your Name: ");
+        String name = sc.nextLine();
+
+        System.out.println("\nSelect Career Goal");
+        System.out.println("1. Data Analyst");
+        System.out.println("2. Java Developer");
+        System.out.println("3. Full Stack Developer");
+
+        System.out.print("Enter Choice: ");
+        int choice = sc.nextInt();
+
+        sc.nextLine();
+
+        System.out.print("How many skills do you have? ");
+        int n = sc.nextInt();
+
+        sc.nextLine();
+
+        for(int i = 1; i <= n; i++) {
+            System.out.print("Enter Skill " + i + ": ");
+            userSkills.add(sc.nextLine());
+        }
+
+        ArrayList<String> requiredSkills = new ArrayList<>();
+        String role = "";
+
+        switch(choice) {
+
+            case 1:
+                role = "Data Analyst";
+                requiredSkills.add("Excel");
+                requiredSkills.add("SQL");
+                requiredSkills.add("Python");
+                requiredSkills.add("Power BI");
+                break;
+
+            case 2:
+                role = "Java Developer";
+                requiredSkills.add("Java");
+                requiredSkills.add("SQL");
+                requiredSkills.add("Spring Boot");
+                break;
+
+            case 3:
+                role = "Full Stack Developer";
+                requiredSkills.add("HTML");
+                requiredSkills.add("CSS");
+                requiredSkills.add("JavaScript");
+                requiredSkills.add("React");
+                break;
+
+            default:
+                System.out.println("Invalid Choice");
+                return;
+        }
+
+        int matched = 0;
+
+        ArrayList<String> missingSkills = new ArrayList<>();
+
+        for(String skill : requiredSkills) {
+
+            if(userSkills.contains(skill)) {
+                matched++;
+            } else {
+                missingSkills.add(skill);
+            }
+        }
+
+        double score =
+        ((double) matched / requiredSkills.size()) * 100;
+
+        System.out.println("\n===== Career Analysis =====");
+
+        System.out.println("Name : " + name);
+
+        System.out.println("Target Role : " + role);
+
+        System.out.println("Skill Readiness : " + score + "%");
+
+        System.out.println("Missing Skills : " + missingSkills);
+
+        System.out.println("\nRecommended Learning Path");
+
+        for(String skill : missingSkills) {
+            System.out.println("- Learn " + skill);
+        }
+
+        sc.close();
+    }
+}
